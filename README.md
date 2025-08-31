@@ -1,4 +1,4 @@
-# s&box HTN (Hierarchial Task Network) Planner
+# s&box HTN (Hierarchical Task Network) Planner
 
 > ***This is still in development, and probably not stable enough for usage in your project yet.***
 > ***I am "dogfooding" this library to drive a few thousand AI agents within a reasonable time budget, and once I'm happy enough with the API design I will look at locking it down and publishing.***
@@ -9,19 +9,19 @@ HTN AI planner - Readme WIP
 
 Game AI often takes the form of Finite State Machines and Behaviour Trees, where behaviours and the transitions between behaviours are specifically crafted. The agent will evaluate on-the-fly the most appropriate action for the current world state, potentially at the detriment of a longer-term goal.
 
-Planning approaches it differently, building the ideal plan (series of sequential tasks) that best "solves" the world state. This was popularized in games by FEAR's clever of GOAP (Goal-Oriented Action Planning), but GOAP is not the only planning algorithm.
+Planning approaches it differently, building the ideal plan (series of sequential tasks) that best "solves" the world state. This was popularized in games by FEAR's clever use of GOAP (Goal-Oriented Action Planning), but GOAP is not the only planning algorithm.
 
-## What is HTN (Hierarchial Task Network) planning?
+## What is HTN (Hierarchical Task Network) planning?
 
-The building blocks of the Hierarchial Task Network are:
-- **Primitive Tasks**: A single performable operation, such as: Pick up object, Walk to position
+The building blocks of the Hierarchical Task Network are:
+- **Primitive Tasks**: A single actionable operation, such as: Pick up object, Walk to position
 - **Compound Tasks**: A series of sequential **Branches**, each branch has a set of preconditions and actions to perform if preconditions are met
 
 HTN planning involves taking a root compound task, evaluating the branches against the world state to find the ideal compound + primitive tasks to perform, and decomposing(*) any compound tasks recursively until we are left with only actionable primitive tasks.
 
 - **Branch**:
   - **Preconditions**: All preconditions must pass for the actions to be chosen
-  - **Tasks**: A list of compound or primitive tasks, recusively decomposed(*) until only primitive tasks remain.
+  - **Tasks**: A list of compound or primitive tasks, recursively decomposed(*) until only primitive tasks remain.
 
 Branch preconditions have a powerful JSHOP2-like query system allowing for smart backtracking, and attempting of alternative matching query results if the initial results do not decompose into a valid set of tasks.
 
